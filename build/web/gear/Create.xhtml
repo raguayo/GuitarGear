@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateGearTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateGearLabel_title}" for="title" />
+                    <h:inputText id="title" value="#{gearController.selected.title}" title="#{bundle.CreateGearTitle_title}" />
+                    <h:outputLabel value="#{bundle.CreateGearLabel_notes}" for="notes" />
+                    <h:inputTextarea rows="4" cols="30" id="notes" value="#{gearController.selected.notes}" title="#{bundle.CreateGearTitle_notes}" />
+                    <h:outputLabel value="#{bundle.CreateGearLabel_ampId}" for="ampId" />
+                    <h:selectOneMenu id="ampId" value="#{gearController.selected.ampId.ampId}" title="#{bundle.CreateGearTitle_ampId}" >
+                        <f:selectItems value="#{ampController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateGearLabel_guitarId}" for="guitarId" />
+                    <h:selectOneMenu id="guitarId" value="#{gearController.selected.guitarId.guitarId}" title="#{bundle.CreateGearTitle_guitarId}" >
+                        <f:selectItems value="#{guitarController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{gearController.create}" value="#{bundle.CreateGearSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{gearController.prepareList}" value="#{bundle.CreateGearShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateGearIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
